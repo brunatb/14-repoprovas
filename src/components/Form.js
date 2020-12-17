@@ -38,11 +38,11 @@ export default function Form(){
             }
         }
         fetchData();
-    }, [])
+    }, []);
 
    
     useEffect(() => {
-        if(classOption !== ''){
+        if(classOption){
             async function fetchData(){
                 try{
                     const request = await axios.get(`${process.env.REACT_APP_BACKURL}/api/${classOption}/teachers`);
@@ -55,7 +55,21 @@ export default function Form(){
             fetchData();
         }
 
-    }, [classOption])
+    }, [classOption]);
+
+    useEffect(() => {
+        if(classOption && teacher){
+            async function fetchData(){
+                try{
+                    const request = await axios.get(`${process.env.REACT_APP_BACKURL}/api/${classOption}/${teacher}/semester`);
+                    setSemesters(request.data);
+                }catch(err){
+                    console.log(err);
+                }
+            }
+            fetchData();
+        }
+    }, [classOption, teacher]);
 
     return(
         <StyledForm>
