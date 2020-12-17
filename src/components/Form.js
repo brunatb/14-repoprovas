@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import {  
     FormControl, 
@@ -13,10 +14,27 @@ import StyledButton from './StyledButton';
 export default function Form(){
     const [testName, setTestName] = useState('');
     const [testUrl, setTestUrl] = useState('');
-    const [classes, setClasses] = useState('');
+    const [classOption, setClassOption] = useState('');
+    const [classes, setClasses] = useState([]);
+    const [teacher, setTeacher] = useState('');
+    const [teachers, setTeachers] = useState([]);
     const [semester, setSemester] = useState('');
+    const [semesters, setSemesters] = useState([]);
     const [type, setType] = useState('');
+    const [types, setTypes] = useState([]);
 
+    useEffect(() => {
+        async function fetchData(){
+            try{
+                const request = await axios.get(`${process.env.REACT_APP_BACKURL}/api/classes`);
+                setClasses(request.data);
+            }catch(err){
+                console.log(err);
+            }
+        }
+        fetchData();
+    }, [])
+    console.log(classes);
     return(
         <StyledForm>
             <FormControl variant="outlined">
@@ -36,14 +54,16 @@ export default function Form(){
             </FormControl>
             
             <SelectOptions 
-                state = {classes} 
-                setState = {setClasses}  
+                state = {classOption} 
+                setState = {setClassOption}  
                 label = {'Disciplinas'}
+                options = {classes}
             />
             <SelectOptions 
-                state = {classes} 
-                setState = {setClasses}  
+                state = {teacher} 
+                setState = {setTeacher}  
                 label = {'Professores'}
+                options = {teachers}
             />
             
             <div className = 'select-container'>
@@ -51,11 +71,13 @@ export default function Form(){
                     state = {semester} 
                     setState = {setSemester}  
                     label = {'Semestre'}
+                    options = {semesters}
                 />
                 <SelectOptions 
                     state = {type} 
                     setState = {setType}  
                     label = {'Tipo'}
+                    options = {types}
                 />
             </div>
             
@@ -73,7 +95,7 @@ const StyledForm = styled.form`
     background: rgba(255, 255, 255, 0.2);
     border-radius: 1.5em;
     z-index: 1;
-    
+
     .MuiOutlinedInput-input{
         padding: 0.8em;
     }

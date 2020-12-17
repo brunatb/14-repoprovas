@@ -6,7 +6,7 @@ import {
     MenuItem
 } from '@material-ui/core';
 
-export default function SelectOptions({ state, setState, label }){
+export default function SelectOptions({ state, setState, label, options }){
 
     return(
         <FormControl>
@@ -19,7 +19,12 @@ export default function SelectOptions({ state, setState, label }){
                   setState(e.target.value);
               }}
             >
-                <MenuItem value = {1}>OI</MenuItem>
+                {
+                    options.length !== 0 ?
+                    options.map(o => <MenuItem key={o.id} value = {o.id}>{o.name}</MenuItem>):
+                    null
+                }
+                
             </Select>
         </FormControl>
     )
