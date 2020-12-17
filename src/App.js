@@ -6,12 +6,16 @@ import {
 } from "react-router-dom";
 import { createGlobalStyle } from 'styled-components';
 import Home from './pages/Home';
+import SendTest from './pages/SendTest';
 
 function App() {
   return (
     <Router>
       <GlobalStyle />
       <Switch>
+        <Route path='/send'>
+          <SendTest />
+        </Route>
         <Route path='/'>
           <Home />
         </Route>
