@@ -28,13 +28,35 @@ export default function Form(){
             try{
                 const request = await axios.get(`${process.env.REACT_APP_BACKURL}/api/classes`);
                 setClasses(request.data);
+                const requestTypes = await axios.get(`${process.env.REACT_APP_BACKURL}/api/categories`);
+                setTypes(requestTypes.data);
+                setTeachers([]);
+                setSemesters([]);
+
             }catch(err){
                 console.log(err);
             }
         }
         fetchData();
     }, [])
-    console.log(classes);
+
+   
+    useEffect(() => {
+        if(classOption !== ''){
+            async function fetchData(){
+                try{
+                    const request = await axios.get(`${process.env.REACT_APP_BACKURL}/api/${classOption}/teachers`);
+                    setTeachers(request.data);
+                    setSemesters([]);
+                }catch(err){
+                    console.log(err)
+                }
+            }
+            fetchData();
+        }
+
+    }, [classOption])
+
     return(
         <StyledForm>
             <FormControl variant="outlined">

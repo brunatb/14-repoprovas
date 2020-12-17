@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 
 export default function SelectOptions({ state, setState, label, options }){
-
+   
     return(
         <FormControl>
             <InputLabel id="classes">{label}</InputLabel>
@@ -21,7 +21,12 @@ export default function SelectOptions({ state, setState, label, options }){
             >
                 {
                     options.length !== 0 ?
-                    options.map(o => <MenuItem key={o.id} value = {o.id}>{o.name}</MenuItem>):
+                    options.map(o => 
+                        <MenuItem 
+                            key={o.id || o.teacherId || o.semesterId} 
+                            value = {o.id || o.teacherId || o.semesterId}
+                        >{o.name}</MenuItem>) :
+
                     null
                 }
                 
