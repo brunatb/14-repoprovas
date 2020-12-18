@@ -8,6 +8,7 @@ import { createGlobalStyle } from 'styled-components';
 import Home from './pages/Home';
 import ListMode from './pages/ListMode';
 import SendTest from './pages/SendTest';
+import TeacherPage from './pages/TeacherPage';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         </Route>
         <Route path='/consultar'>
           <ListMode />
+        </Route>
+        <Route path='/professor/:id'>
+          <TeacherPage />
         </Route>
         <Route path='/'>
           <Home />

@@ -49,7 +49,7 @@ const StyledContainer = styled(Container)`
     }
 
     
-    .teachers-container{
+    .teachers-container, .tests-container{
         margin: 1em 0 0 0;
 
         button:first-child{
@@ -70,10 +70,7 @@ const StyledContainer = styled(Container)`
                 font-size: 0.8em;
             }
         }
-
-        li{
-            
-        }
+      
     }
 `;
 

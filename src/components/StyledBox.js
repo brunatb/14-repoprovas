@@ -12,7 +12,7 @@ const StyledBox = styled(Box)`
 
     h1, h2{
         font-family: var(--especial-font);
-        margin: 0 0 1em 0;
+        margin: 0 0 0.8em 0;
         text-align: center;
         color: #D0F0E4;
     }
@@ -38,6 +38,20 @@ const StyledBox = styled(Box)`
         right: 1vw;
         bottom: 4vh;
 
+    }
+
+    .library{
+        position: absolute;
+        width: 35vw;
+        top: -5vh;
+        right: 0;
+    }
+
+    .prom{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40vw;
     }
 
     .back{
