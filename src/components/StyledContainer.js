@@ -63,6 +63,12 @@ const StyledContainer = styled(Container)`
             font-weight: bold;
             border-top: 1px solid #D0F0E4;
             border-bottom: 1px solid #D0F0E4;
+            display: flex;
+            justify-content: space-between;
+
+            .number-tests{
+                font-size: 0.8em;
+            }
         }
 
         li{
