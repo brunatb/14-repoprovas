@@ -116,7 +116,7 @@ export default function Form(){
 
     async function sendTest(){
 
-        const request = await axios.post(`${process.env.REACT_APP_BACKURL}/api/test`,
+        await axios.post(`${process.env.REACT_APP_BACKURL}/api/test`,
         {
             name: testName,
             url: testUrl,
