@@ -40,7 +40,7 @@ export default function TeacherPage(){
             </Link>
             {
                 teacher ?
-                <h2>{teacher}</h2>
+                <h2>Prof: {teacher}</h2>
                 :
                 null
             }

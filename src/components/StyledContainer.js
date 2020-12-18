@@ -8,7 +8,7 @@ const StyledContainer = styled(Container)`
         display: flex;
         flex-direction: column;
         padding: 3em;
-        max-height: 60vh;
+        max-height: 70vh;
         overflow-y: scroll
     }
     border-radius: 1.5em;

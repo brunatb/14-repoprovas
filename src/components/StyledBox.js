@@ -22,7 +22,7 @@ const StyledBox = styled(Box)`
     }
 
     h2{
-        font-size: 2.5em;
+        font-size: 2em;
     }
 
     .student{

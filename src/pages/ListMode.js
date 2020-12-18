@@ -18,7 +18,6 @@ export default function ListMode(){
             <Link to='/'>
                 <ArrowBackIcon className="back" />
             </Link>
-            <h2>Provas</h2>
             <StyledContainer>
                 <h3>Listar provas por: </h3>
                 <ButtonGroup variant="contained" color="primary" aria-label="contained primarybutton   group">
