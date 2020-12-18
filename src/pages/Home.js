@@ -19,7 +19,7 @@ export default function Home(){
                     <BackupIcon />
                     Enviar Prova
                 </StyledButton>
-                <StyledButton variant="contained">
+                <StyledButton variant="contained"  onClick={() => history.push('/consultar')}>
                     <LibraryBooksIcon />
                    Consultar Prova
                 </StyledButton>
