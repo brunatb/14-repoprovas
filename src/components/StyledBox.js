@@ -32,6 +32,15 @@ const StyledBox = styled(Box)`
         bottom: 4vh;
 
     }
+
+    .back{
+        position: absolute;
+        font-size: 2.5em;
+        color: #D0F0E4;
+        left: 10vw;
+        top: 10vh;
+        cursor: pointer;
+    }
 `;
 
 export default StyledBox;

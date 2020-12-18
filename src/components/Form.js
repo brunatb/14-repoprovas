@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import {  
     FormControl, 
@@ -6,6 +7,7 @@ import {
     Input, 
     FormHelperText,
 } from '@material-ui/core';
+import Swal from 'sweetalert2';
 
 import SelectOptions from './SelectOptions';
 import StyledButton from './StyledButton';
@@ -13,12 +15,127 @@ import StyledButton from './StyledButton';
 export default function Form(){
     const [testName, setTestName] = useState('');
     const [testUrl, setTestUrl] = useState('');
-    const [classes, setClasses] = useState('');
+    const [classOption, setClassOption] = useState('');
+    const [classes, setClasses] = useState([]);
+    const [teacher, setTeacher] = useState('');
+    const [teachers, setTeachers] = useState([]);
     const [semester, setSemester] = useState('');
+    const [semesters, setSemesters] = useState([]);
     const [type, setType] = useState('');
+    const [types, setTypes] = useState([]);
+    const [isDisabled, setIsDisabled] = useState(false);
+
+    useEffect(() => {
+        async function fetchData(){
+            try{
+                const request = await axios.get(`${process.env.REACT_APP_BACKURL}/api/classes`);
+                setClasses(request.data);
+                const requestTypes = await axios.get(`${process.env.REACT_APP_BACKURL}/api/categories`);
+                setTypes(requestTypes.data);
+                setTeachers([]);
+                setSemesters([]);
+
+            }catch(err){
+                console.log(err);
+            }
+        }
+        fetchData();
+    }, []);
+
+   
+    useEffect(() => {
+        if(classOption){
+            async function fetchData(){
+                try{
+                    const request = await axios.get(`${process.env.REACT_APP_BACKURL}/api/${classOption}/teachers`);
+                    setTeachers(request.data);
+                    setSemesters([]);
+                }catch(err){
+                    console.log(err)
+                }
+            }
+            fetchData();
+        }
+
+    }, [classOption]);
+
+    useEffect(() => {
+        if(classOption && teacher){
+            async function fetchData(){
+                try{
+                    const request = await axios.get(`${process.env.REACT_APP_BACKURL}/api/${classOption}/${teacher}/semester`);
+                    setSemesters(request.data);
+                }catch(err){
+                    console.log(err);
+                }
+            }
+            fetchData();
+        }
+    }, [classOption, teacher]);
+
+    async function handleSubmit(e){
+        e.preventDefault();
+        setIsDisabled(true);
+        if(verifyInputs()){
+            try{
+                await sendTest();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Prova enviada!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                restoreInputs();
+
+            }catch(err){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Preencha todos os campos corretamente!',
+                    confirmButtonColor: '#F8226F'
+                })
+            }
+            
+        }
+    }
+
+    function verifyInputs(){
+        if(!(testName && testUrl && classOption && teacher && semester && type)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha todos os campos!',
+                confirmButtonColor: '#F8226F'
+              })
+            return false;
+        }
+        return true;
+    }
+
+    async function sendTest(){
+
+        const request = await axios.post(`${process.env.REACT_APP_BACKURL}/api/test`,
+        {
+            name: testName,
+            url: testUrl,
+            classId: classOption,
+            teacherId: teacher,
+            semesterId: semester,
+            categoryId: type,
+        });
+    }
+
+    function restoreInputs(){
+        setTestName('');
+        setTestUrl('');
+        setTeachers([]);
+        setSemesters([]);
+        setIsDisabled(false);
+    }
 
     return(
-        <StyledForm>
+        <StyledForm onSubmit={handleSubmit}>
             <FormControl variant="outlined">
                 <InputLabel htmlFor="test">Prova</InputLabel>
                 <Input id="test" value={testName} onChange={ e => {
@@ -36,14 +153,16 @@ export default function Form(){
             </FormControl>
             
             <SelectOptions 
-                state = {classes} 
-                setState = {setClasses}  
+                state = {classOption} 
+                setState = {setClassOption}  
                 label = {'Disciplinas'}
+                options = {classes}
             />
             <SelectOptions 
-                state = {classes} 
-                setState = {setClasses}  
+                state = {teacher} 
+                setState = {setTeacher}  
                 label = {'Professores'}
+                options = {teachers}
             />
             
             <div className = 'select-container'>
@@ -51,15 +170,17 @@ export default function Form(){
                     state = {semester} 
                     setState = {setSemester}  
                     label = {'Semestre'}
+                    options = {semesters}
                 />
                 <SelectOptions 
                     state = {type} 
                     setState = {setType}  
                     label = {'Tipo'}
+                    options = {types}
                 />
             </div>
             
-            <StyledButton>Enviar</StyledButton>
+            <StyledButton type='submit' disabled={isDisabled}>Enviar</StyledButton>
         </StyledForm>
     )
 }
@@ -73,7 +194,7 @@ const StyledForm = styled.form`
     background: rgba(255, 255, 255, 0.2);
     border-radius: 1.5em;
     z-index: 1;
-    
+
     .MuiOutlinedInput-input{
         padding: 0.8em;
     }

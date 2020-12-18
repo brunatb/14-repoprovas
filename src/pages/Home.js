@@ -6,14 +6,16 @@ import student from '../images/studying.svg';
 import StyledBox from '../components/StyledBox';
 import StyledContainer from '../components/StyledContainer';
 import StyledButton from '../components/StyledButton';
+import { useHistory } from 'react-router-dom';
 
 export default function Home(){
+    const history = useHistory();
     return(
         <>
         <StyledBox>
             <h1>RepoProvas</h1>
             <StyledContainer>
-                <StyledButton variant="contained">
+                <StyledButton variant="contained" onClick={() => history.push('/send')}>
                     <BackupIcon />
                     Enviar Prova
                 </StyledButton>
