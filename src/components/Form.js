@@ -7,6 +7,7 @@ import {
     Input, 
     FormHelperText,
 } from '@material-ui/core';
+import Swal from 'sweetalert2';
 
 import SelectOptions from './SelectOptions';
 import StyledButton from './StyledButton';
@@ -22,6 +23,7 @@ export default function Form(){
     const [semesters, setSemesters] = useState([]);
     const [type, setType] = useState('');
     const [types, setTypes] = useState([]);
+    const [isDisabled, setIsDisabled] = useState(false);
 
     useEffect(() => {
         async function fetchData(){
@@ -71,8 +73,69 @@ export default function Form(){
         }
     }, [classOption, teacher]);
 
+    async function handleSubmit(e){
+        e.preventDefault();
+        setIsDisabled(true);
+        if(verifyInputs()){
+            try{
+                await sendTest();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Prova enviada!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                restoreInputs();
+
+            }catch(err){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Preencha todos os campos corretamente!',
+                    confirmButtonColor: '#F8226F'
+                })
+            }
+            
+        }
+    }
+
+    function verifyInputs(){
+        if(!(testName && testUrl && classOption && teacher && semester && type)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha todos os campos!',
+                confirmButtonColor: '#F8226F'
+              })
+            return false;
+        }
+        return true;
+    }
+
+    async function sendTest(){
+
+        const request = await axios.post(`${process.env.REACT_APP_BACKURL}/api/test`,
+        {
+            name: testName,
+            url: testUrl,
+            classId: classOption,
+            teacherId: teacher,
+            semesterId: semester,
+            categoryId: type,
+        });
+    }
+
+    function restoreInputs(){
+        setTestName('');
+        setTestUrl('');
+        setTeachers([]);
+        setSemesters([]);
+        setIsDisabled(false);
+    }
+
     return(
-        <StyledForm>
+        <StyledForm onSubmit={handleSubmit}>
             <FormControl variant="outlined">
                 <InputLabel htmlFor="test">Prova</InputLabel>
                 <Input id="test" value={testName} onChange={ e => {
@@ -117,7 +180,7 @@ export default function Form(){
                 />
             </div>
             
-            <StyledButton>Enviar</StyledButton>
+            <StyledButton type='submit' disabled={isDisabled}>Enviar</StyledButton>
         </StyledForm>
     )
 }
