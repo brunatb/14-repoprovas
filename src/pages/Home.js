@@ -15,7 +15,7 @@ export default function Home(){
         <StyledBox>
             <h1>RepoProvas</h1>
             <StyledContainer>
-                <StyledButton variant="contained" onClick={() => history.push('/send')}>
+                <StyledButton variant="contained" onClick={() => history.push('/enviar')}>
                     <BackupIcon />
                     Enviar Prova
                 </StyledButton>

@@ -13,8 +13,11 @@ function App() {
     <Router>
       <GlobalStyle />
       <Switch>
-        <Route path='/send'>
+        <Route path='/enviar'>
           <SendTest />
+        </Route>
+        <Route path='/consultar'>
+          
         </Route>
         <Route path='/'>
           <Home />
