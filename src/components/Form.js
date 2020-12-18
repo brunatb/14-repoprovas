@@ -107,7 +107,8 @@ export default function Form(){
                 title: 'Oops...',
                 text: 'Preencha todos os campos!',
                 confirmButtonColor: '#F8226F'
-              })
+            })
+            setIsDisabled(false);
             return false;
         }
         return true;
