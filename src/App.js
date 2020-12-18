@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import { createGlobalStyle } from 'styled-components';
 import Home from './pages/Home';
+import ListMode from './pages/ListMode';
 import SendTest from './pages/SendTest';
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
           <SendTest />
         </Route>
         <Route path='/consultar'>
-          
+          <ListMode />
         </Route>
         <Route path='/'>
           <Home />

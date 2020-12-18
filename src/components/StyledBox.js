@@ -10,12 +10,19 @@ const StyledBox = styled(Box)`
     flex-direction: column;
     justify-content: center;
 
-    h1{
+    h1, h2{
         font-family: var(--especial-font);
         margin: 0 0 1em 0;
-        font-size: 3em;
         text-align: center;
         color: #D0F0E4;
+    }
+
+    h1{
+        font-size: 3em;
+    }
+
+    h2{
+        font-size: 2.5em;
     }
 
     .student{
