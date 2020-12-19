@@ -8,6 +8,7 @@ import StyledBox from '../components/StyledBox';
 import StyledContainer from '../components/StyledContainer';
 import Teachers from '../components/Teachers';
 import library from '../images/library.svg'
+import Classes from '../components/Classes';
 
 export default function ListMode(){
     const [isListByTeacher, setIsListByTeacher] = useState(true);
@@ -28,7 +29,7 @@ export default function ListMode(){
                     isListByTeacher ? 
                     <Teachers/>
                     :
-                    null
+                    <Classes />
                 }
 
             </StyledContainer>

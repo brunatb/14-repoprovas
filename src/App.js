@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import ListMode from './pages/ListMode';
 import SendTest from './pages/SendTest';
 import TeacherPage from './pages/TeacherPage';
+import ClassPage from './pages/ClassPage';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route path='/professor/:id'>
           <TeacherPage />
+        </Route>
+        <Route path= '/materia/:id'>
+          <ClassPage />
         </Route>
         <Route path='/'>
           <Home />

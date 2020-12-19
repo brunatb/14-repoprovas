@@ -37,7 +37,7 @@ const StyledContainer = styled(Container)`
 
     .MuiButtonGroup-contained{
         width: fit-content;
-        margin: 0 auto;
+        margin: 0.3em auto;
 
         & > .MuiButton-containedPrimary{
             background: #D0F0E4;
@@ -49,7 +49,7 @@ const StyledContainer = styled(Container)`
     }
 
     
-    .teachers-container, .tests-container{
+    .teachers-container, .tests-container, .class-container{
         margin: 1em 0 0 0;
 
         button:first-child{
