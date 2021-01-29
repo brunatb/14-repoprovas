@@ -1,1 +1,3 @@
-# 14-repo-provas-front
+# RepoProvas 
+
+This project simulates a website where you can post or consult old exams from your college / school.
