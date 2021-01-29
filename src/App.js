@@ -1,34 +1,30 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
-import { createGlobalStyle } from 'styled-components';
-import Home from './pages/Home';
-import ListMode from './pages/ListMode';
-import SendTest from './pages/SendTest';
-import TeacherPage from './pages/TeacherPage';
-import ClassPage from './pages/ClassPage';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
+import Home from "./pages/Home";
+import ListMode from "./pages/ListMode";
+import SendTest from "./pages/SendTest";
+import TeacherPage from "./pages/TeacherPage";
+import ClassPage from "./pages/ClassPage";
 
 function App() {
   return (
     <Router>
       <GlobalStyle />
       <Switch>
-        <Route path='/enviar'>
+        <Route path="/enviar">
           <SendTest />
         </Route>
-        <Route path='/consultar'>
+        <Route path="/consultar">
           <ListMode />
         </Route>
-        <Route path='/professor/:id'>
+        <Route path="/professor/:id">
           <TeacherPage />
         </Route>
-        <Route path= '/materia/:id'>
+        <Route path="/materia/:id/semester/:semesterId">
           <ClassPage />
         </Route>
-        <Route path='/'>
+        <Route path="/">
           <Home />
         </Route>
       </Switch>
@@ -49,7 +45,5 @@ const GlobalStyle = createGlobalStyle`
     background: var(--gradient);
   }
 `;
-
-
 
 export default App;
