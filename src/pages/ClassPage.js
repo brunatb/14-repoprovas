@@ -63,7 +63,7 @@ export default function ClassPage() {
       </Link>
       {className ? <h2>{className}</h2> : null}
 
-      <StyledContainer loading={loading}>
+      <StyledContainer loading>
         <ButtonGroup
           variant="contained"
           color="primary"

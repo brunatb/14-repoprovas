@@ -34,6 +34,7 @@ export default function Form() {
         const request = await axios.get(
           `${process.env.REACT_APP_BACKURL}/api/classes`
         );
+
         setClasses(request.data);
         const requestTypes = await axios.get(
           `${process.env.REACT_APP_BACKURL}/api/categories`
