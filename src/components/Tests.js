@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-nested-ternary */
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
