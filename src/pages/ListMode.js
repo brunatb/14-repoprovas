@@ -12,6 +12,7 @@ import Classes from "../components/Classes";
 
 export default function ListMode() {
   const [isListByTeacher, setIsListByTeacher] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   return (
     <StyledBox>
@@ -19,7 +20,7 @@ export default function ListMode() {
       <Link to="/">
         <ArrowBackIcon className="back" />
       </Link>
-      <StyledContainer>
+      <StyledContainer loading={loading}>
         <h3>Listar provas por: </h3>
         <ButtonGroup
           variant="contained"
@@ -29,7 +30,11 @@ export default function ListMode() {
           <Button onClick={() => setIsListByTeacher(true)}>Professor</Button>
           <Button onClick={() => setIsListByTeacher(false)}>Matéria</Button>
         </ButtonGroup>
-        {isListByTeacher ? <Teachers /> : <Classes />}
+        {isListByTeacher ? (
+          <Teachers setLoading={setLoading} loading={loading} />
+        ) : (
+          <Classes setLoading={setLoading} loading={loading} />
+        )}
       </StyledContainer>
     </StyledBox>
   );

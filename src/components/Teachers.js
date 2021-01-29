@@ -8,10 +8,9 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 
-export default function Teachers() {
+export default function Teachers({ setLoading, loading }) {
   const [teachers, setTeachers] = useState([]);
   const history = useHistory();
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {

@@ -54,7 +54,7 @@ export default function ClassPage() {
     }
     fetchData();
   }, [categorie]);
-
+  console.log(loading);
   return (
     <StyledBox>
       <img src={prom} alt="formatura" className="prom" />
@@ -63,7 +63,7 @@ export default function ClassPage() {
       </Link>
       {className ? <h2>{className}</h2> : null}
 
-      <StyledContainer>
+      <StyledContainer loading={loading}>
         <ButtonGroup
           variant="contained"
           color="primary"

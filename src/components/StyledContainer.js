@@ -53,6 +53,10 @@ const StyledContainer = styled(Container)`
   .class-container {
     margin: 1em auto 0 auto;
     width: 100%;
+    ${(props) =>
+      props.loading
+        ? "display: flex; flex-direction: column; align-items: center;"
+        : ""}
     button:first-child {
       border-top: 0;
     }

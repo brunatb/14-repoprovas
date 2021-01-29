@@ -5,8 +5,9 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
+import { CircularProgress } from "@material-ui/core";
 
-export default function Classes() {
+export default function Classes({ setLoading, loading }) {
   const [semesters, setSemesters] = useState([]);
   const [classes, setClasses] = useState([]);
   const [semester, setSemester] = useState(1);
@@ -28,6 +29,7 @@ export default function Classes() {
         `${process.env.REACT_APP_BACKURL}/api/classes/semesters/${semester}`
       );
       setClasses(request.data);
+      setLoading(false);
     }
     fetchData();
   }, [semester]);
@@ -48,6 +50,7 @@ export default function Classes() {
           : null}
       </ButtonGroup>
       <ul className="class-container">
+        {loading ? <CircularProgress color="secondary" /> : ""}
         {classes.length !== 0
           ? classes.map((c) => (
               <li
